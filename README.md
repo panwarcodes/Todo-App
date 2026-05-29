@@ -8,6 +8,10 @@ Since this is my first real JavaScript project, I felt it deserved its own separ
 
 This is Version 1 of the project.
 
+Live Preview: https://panwarcodes.github.io/Todo-App
+
+![Preview Image](./images/image.png)
+
 Features:
 - Add tasks
 - Edit tasks
