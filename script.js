@@ -5,11 +5,11 @@ const taskStorage = document.querySelector('.taskStorage')
 // listening to main textarea element for dynamic height adjustment
 
 input.addEventListener("input", () => {
-  // Reset height to calculate fresh scroll height
-  input.style.height = "auto";  
-  
-  // Set new height based on internal text content height
-  input.style.height = input.scrollHeight + "px";
+    // Reset height to calculate fresh scroll height
+    input.style.height = "auto";
+
+    // Set new height based on internal text content height
+    input.style.height = input.scrollHeight + "px";
 });
 
 // for rendering existing tasks 
@@ -86,14 +86,6 @@ function uiInstructor(array) {
 
         const taskStatus = document.createElement('button');
         taskStatus.classList.add('taskStatus');
-        if (array[i].isCompleted === false) {
-            taskStatus.textContent = "➕";
-        }
-        else {
-            taskStatus.textContent = "✅";
-            taskname.style.textDecoration = "line-through";
-            taskname.style.opacity = "0.7";
-        }
 
         taskStorage.appendChild(Inside_tasks_Div);
         Inside_tasks_Div.appendChild(taskStatus);
@@ -148,7 +140,7 @@ function uiInstructor(array) {
 
             // Reset height to calculate fresh scroll height
             editInput.style.height = "auto";
-        
+
             // Set new height based on internal text content height
             editInput.style.height = editInput.scrollHeight + "px";
 
@@ -173,8 +165,16 @@ function uiInstructor(array) {
             Inside_tasks_Div.remove();
             uiInstructor(arrayStored);
         });
-
-
+        if (array[i].isCompleted === false) {
+            taskStatus.textContent = "➕";
+        }
+        else {
+            taskStatus.textContent = "✅";
+            taskname.style.textDecoration = "line-through";
+            taskname.style.opacity = "0.7";
+            editButton.remove();
+            taskname.style.width = "19.1em";
+        }
     }
 }
 
