@@ -2,12 +2,24 @@ const form = document.querySelector('.tasks');
 const input = document.querySelector('.taskInput');
 const taskStorage = document.querySelector('.taskStorage')
 
+// listening to main textarea element for dynamic height adjustment
+
+input.addEventListener("input", () => {
+  // Reset height to calculate fresh scroll height
+  input.style.height = "auto";  
+  
+  // Set new height based on internal text content height
+  input.style.height = input.scrollHeight + "px";
+});
+
 // for rendering existing tasks 
+
 taskLoader();
 
 // listening to add button 
 
 form.addEventListener('submit', (event) => {
+    input.style.height = "auto";
     event.preventDefault();
     if (input.value === "") {
         window.alert('Please enter a task first!');
@@ -30,19 +42,24 @@ function taskAdder(valueToAdd) {
     const array_old = JSON.parse(localStorage.getItem("tasks"));
     // adding new first task for initilization if it's user's first visit
     if (array_old === null) {
-        taskList.push(valueToAdd);
+        taskList.push({
+            task: valueToAdd,
+            isCompleted: false
+        });
         localStorage.setItem("tasks", JSON.stringify(taskList));
     }
 
     // adding more tasks after initializing first task
     else {
         taskList.length = 0;
-        for (i = 0; i < array_old.length; i++) {
+        for (let i = 0; i < array_old.length; i++) {
             taskList.push(array_old[i]);
         }
 
-        // taskList.length = 0;
-        taskList.push(valueToAdd);
+        taskList.push({
+            task: valueToAdd,
+            isCompleted: false
+        });
         localStorage.setItem("tasks", JSON.stringify(taskList));
     }
 
@@ -51,7 +68,7 @@ function taskAdder(valueToAdd) {
     uiInstructor(array);
 }
 
-// rendering UI using arrays for both newly added tasks and older tasks in the localStorage
+// live UI rendering using arrays for both newly added tasks and older tasks in the localStorage
 
 function uiInstructor(array) {
     console.log("rendering", array);
@@ -65,9 +82,21 @@ function uiInstructor(array) {
 
         const taskname = document.createElement('p');
         taskname.classList.add('taskTEXT');
-        taskname.textContent = array[i];
+        taskname.textContent = array[i].task;
+
+        const taskStatus = document.createElement('button');
+        taskStatus.classList.add('taskStatus');
+        if (array[i].isCompleted === false) {
+            taskStatus.textContent = "➕";
+        }
+        else {
+            taskStatus.textContent = "✅";
+            taskname.style.textDecoration = "line-through";
+            taskname.style.opacity = "0.7";
+        }
 
         taskStorage.appendChild(Inside_tasks_Div);
+        Inside_tasks_Div.appendChild(taskStatus);
         Inside_tasks_Div.appendChild(taskname);
 
         const buttonStorage = document.createElement('div');
@@ -85,31 +114,53 @@ function uiInstructor(array) {
         deleteButton.textContent = "Delete";
         buttonStorage.appendChild(deleteButton);
 
-        const editInput = document.createElement('input');
-        editInput.classList.add('editInput')
-        editInput.defaultValue = array[i];
+        const editInput = document.createElement('textarea');
+        editInput.classList.add('editInput');
+        editInput.setAttribute('placeholder', 'Type here...');
+        editInput.setAttribute('rows', '1');
+        editInput.defaultValue = array[i].task;
 
         const saveButton = document.createElement('button');
         saveButton.classList.add('saveButton');
         saveButton.textContent = 'Save';
+
+        taskStatus.addEventListener('click', () => {
+            if (array[i].isCompleted === false) {
+                array[i].isCompleted = true;
+                localStorage.setItem("tasks", JSON.stringify(array));
+            }
+            else if (array[i].isCompleted === true) {
+                array[i].isCompleted = false;
+                localStorage.setItem("tasks", JSON.stringify(array));
+            }
+            uiInstructor(array);
+        })
 
         editButton.addEventListener('click', (event) => {
             taskname.remove();
             editButton.remove();
             deleteButton.remove();
             buttonStorage.remove();
+            taskStatus.remove();
             Inside_tasks_Div.appendChild(editInput);
             Inside_tasks_Div.appendChild(saveButton);
             event.preventDefault();
+
+            // Reset height to calculate fresh scroll height
+            editInput.style.height = "auto";
+        
+            // Set new height based on internal text content height
+            editInput.style.height = editInput.scrollHeight + "px";
+
             saveEdit();
         });
 
         function saveEdit() {
-            return saveButton.addEventListener('click', () => {
+            saveButton.addEventListener('click', () => {
                 editInput.remove();
                 saveButton.remove();
 
-                array[i] = editInput.value;
+                array[i].task = editInput.value;
                 localStorage.setItem("tasks", JSON.stringify(array));
                 uiInstructor(array);
             })
@@ -127,7 +178,7 @@ function uiInstructor(array) {
     }
 }
 
-// extracts task data from localStorage and calls uiInstructor()
+// extracts task data from localStorage and calls uiInstructor() for UI rendering
 
 function taskLoader() {
     const arrayGet = JSON.parse(localStorage.getItem("tasks"));
