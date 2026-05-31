@@ -17,6 +17,13 @@ https://panwarcodes.github.io/Todo-App
 ## Change Log
 
 <details>
+  <summary><b>Version 3.5</b></summary>
+
+  - Mobile responsive UI added
+  - Mobile responsiveness improvements
+</details>
+
+<details>
   <summary><b>Version 3</b></summary>
 
   - Changed tasks from simple strings into objects with status keys
@@ -104,7 +111,7 @@ https://panwarcodes.github.io/Todo-App
 
 * [x] Fix task order after page refresh
 * [x] Task completion / checkbox support
-* [ ] Mobile responsiveness improvements
+* [x] Mobile responsiveness improvements
 
 ---
 

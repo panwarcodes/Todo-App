@@ -22,7 +22,7 @@ main {
     height: auto;
     width: 33em;
     /* centers the Todo App Hero */
-    margin: auto;
+    margin: 0 auto;
     background-color: rgb(23, 23, 23);
     border: 2px solid white;
     border-radius: 1em;
@@ -129,6 +129,12 @@ footer {
     cursor: pointer;
 }
 
+.taskStatusName {
+    display: flex;
+    flex-direction: row;
+    gap: 7.5px;
+}
+
 .saveButton {
     margin: 0;
 }
@@ -136,4 +142,98 @@ footer {
 .buttonStorage {
     position: relative;
     left: 3px;
+}
+
+.task-completed-delete-btn {
+  width: 315%;
+  position: relative;
+  right: 116px;
+}
+
+/* tablet */
+
+@media screen and (max-width: 734px) {
+
+    body {
+    padding: 0px;
+    padding-top: 6.25em;
+    }
+
+    main {
+        margin: auto;
+        
+    }
+}
+
+/* phone */
+
+@media screen and (max-width: 548px) {
+    main {
+        width: 95%;
+        min-width: 5em;
+        min-height: 11em;
+        height: auto;
+        align-content: center;
+        /* padding: 0px; */
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    .taskInput {
+        width: 100%;
+    }
+
+    .addButton {
+        width: 100%;
+        right: 0em;
+    }
+
+    .Inside_tasks_div {
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        margin-top: 0.9em;
+    }
+
+    .taskStatusName {
+        width: 100%;
+    }
+
+    .taskTEXT {
+        width: 100%;
+    }
+    
+    .buttonStorage {
+        width: 100%;
+        margin-top: 1em;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .editButton {
+        width: 50%;
+    }
+
+    .deleteButton {
+        width: 50%;
+        position: relative;
+        left: 1px;
+    }
+
+    .editInput {
+        width: 100%;
+    }
+
+    .saveButton {
+        margin-top: 0.9em;
+        width: 100%;
+    }
+
+    .task-completed-delete-btn {
+        width: 100%;
+        right: 0; /* Resets the alignment so it sits nicely */
+        position: static;
+    }
 }

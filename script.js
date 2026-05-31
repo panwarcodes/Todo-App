@@ -80,6 +80,9 @@ function uiInstructor(array) {
         const Inside_tasks_Div = document.createElement('div');
         Inside_tasks_Div.classList.add('Inside_tasks_div');
 
+        const taskStatusName = document.createElement('div');
+        taskStatusName.classList.add('taskStatusName');
+
         const taskname = document.createElement('p');
         taskname.classList.add('taskTEXT');
         taskname.textContent = array[i].task;
@@ -88,8 +91,9 @@ function uiInstructor(array) {
         taskStatus.classList.add('taskStatus');
 
         taskStorage.appendChild(Inside_tasks_Div);
-        Inside_tasks_Div.appendChild(taskStatus);
-        Inside_tasks_Div.appendChild(taskname);
+        Inside_tasks_Div.appendChild(taskStatusName);
+        taskStatusName.appendChild(taskStatus);
+        taskStatusName.appendChild(taskname);
 
         const buttonStorage = document.createElement('div');
         buttonStorage.classList.add('buttonStorage');
@@ -173,7 +177,7 @@ function uiInstructor(array) {
             taskname.style.textDecoration = "line-through";
             taskname.style.opacity = "0.7";
             editButton.remove();
-            taskname.style.width = "19.1em";
+            deleteButton.classList.add('task-completed-delete-btn');
         }
     }
 }
