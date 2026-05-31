@@ -6,7 +6,7 @@ This project took around 5 days of work (3–4 hours daily) and involved a lot o
 
 Since this is my first complete JavaScript project, I felt it deserved its own repository.
 
-This is **Version 3** of the project.
+This is **Version 3.5** of the project.
 
 ### Live Preview
 

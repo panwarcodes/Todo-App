@@ -48,7 +48,7 @@ form {
 .taskInput,
 .editInput {
     margin: 0.9em;
-    min-height: 2.7em;
+    min-height: 2.8em;
     width: 23.3em;
     padding: 10px;
     resize: none;
@@ -58,11 +58,15 @@ form {
     background-color: black;
     border: 2px solid white;
     border-radius: 1em;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .editInput {
     margin: 0;
+    width: 18.2em;
+    position: relative;
+    right: 3px;
+
 }
 
 .addButton,
@@ -137,6 +141,9 @@ footer {
 
 .saveButton {
     margin: 0;
+    width: 167px;
+    position: relative;
+    left: 3px;
 }
 
 .buttonStorage {
