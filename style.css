@@ -231,11 +231,13 @@ footer {
 
     .editInput {
         width: 100%;
+        position: static;
     }
 
     .saveButton {
         margin-top: 0.9em;
         width: 100%;
+        position: static;
     }
 
     .task-completed-delete-btn {
